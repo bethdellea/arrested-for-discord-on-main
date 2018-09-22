@@ -21,8 +21,8 @@ class Tweeter:
 
     character_limit = 280
 
-    def __init__(self, account):
-        self.set_account(account)
+    def __init__(self, access_token, access_secret):
+        self.set_account(access_token, access_secret)
 
         self.api_connect()
 
@@ -33,14 +33,10 @@ class Tweeter:
         self.API = tweepy.API(auth)
 
 
-    def set_account(self, account):
-        LOG.warning("SETTING ACCOUNT: " + account)
-        if account in ACCESS_TOKEN.keys():
-            self.access_token = ACCESS_TOKEN[account]
-            self.access_secret = ACCESS_SECRET[account]
-        else:
-            LOG.error("ACCOUNT "+account+" NOT FOUND, AUTH WILL FAIL")
-
+    def set_account(self, access_token, access_secret):
+        #LOG.warning("SETTING ACCOUNT: " + account)
+        self.access_token = access_token
+        self.access_secret = access_secret
 
     def clean_string(self,string):
         #unicode characters like pesky emojis can break processing and output,
